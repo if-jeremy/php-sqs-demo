@@ -4,13 +4,18 @@
 require 'aws.phar';
 
 use Aws\Exception\AwsException;
+use Aws\Credentials\CredentialProvider;
 use Aws\Sqs\SqsClient;
+
+$provider = CredentialProvider::ecsCredentials();
+$memoizedCredentials = CredentialProvider::memoize($provider);
 
 // Create an SQS client
 $client = new SqsClient([
     'profile' => 'default',
     'region' => 'us-east-1',
-    'version' => '2012-11-05'
+    'version' => '2012-11-05',
+    'credentials' => $memoizedCredentials
 ]);
 
 $uniqueId = uniqid();
