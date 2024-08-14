@@ -12,7 +12,6 @@ $memoizedCredentials = CredentialProvider::memoize($provider);
 
 // Create an SQS client
 $client = new SqsClient([
-    'profile' => 'default',
     'region' => 'us-east-1',
     'version' => '2012-11-05',
     'credentials' => $memoizedCredentials
@@ -24,6 +23,7 @@ $params = [
     'MessageBody' => "{ \"name:\" \"Jeremy Utley\", \"email\": \"jutley@seedbox.com\"}",
     'QueueUrl' => 'https://sqs.us-east-1.amazonaws.com/678218462727/TestFIFOQueue.fifo',
     'MessageDeduplicationId' => $uniqueId,
+    'MessageGroupId' => 'foo'
 ];
 
 try {

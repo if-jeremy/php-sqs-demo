@@ -12,7 +12,6 @@ $provider = CredentialProvider::ecsCredentials();
 $memoizedCredentials = CredentialProvider::memoize($provider);
 
 $client = new SqsClient([
-    'profile' => 'default',
     'region' => 'us-east-1',
     'version' => '2012-11-05'
     'credentials' => $memoizedCredentials
